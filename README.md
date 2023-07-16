@@ -12,6 +12,14 @@
 * API library - Senerity Rest Assured (version - 3.9.0)
 * Reporting: Serenity
 
+# Pre-requisite to run project:
+* JAVA_HOME & MAVEN_HOME installed and in set in your Windows environment variable.
+
+  ![image](https://github.com/nsarode09/SerenityCucumberBDDWeatherbitFramework/assets/139661841/93816723-44f5-4913-838a-60a36ed3a197)
+
+![image](https://github.com/nsarode09/SerenityCucumberBDDWeatherbitFramework/assets/139661841/8c091f8c-3bfe-4f7e-a2f2-db9a7aa2bd7e)
+
+
 # The project directory structure:
 
 The project is a maven project and follows the standard directory structure:
@@ -80,7 +88,13 @@ The report is customized by the properties added in the serenity.properties file
 
 ![image](https://github.com/nsarode09/SerenityCucumberBDDWeatherbitFramework/assets/139661841/d398c902-bc03-4efe-a3f5-fb466dd4b06d)
 
-Final Report
+# Final Report if run as JUnit Test from Test Runner Class:
 
 ![image](https://github.com/nsarode09/SerenityCucumberBDDWeatherbitFramework/assets/139661841/0b29808a-78e2-4ad7-80a5-b8d37665ce61)
+
+# Final Report, if run with maven command - mvn clean verify
+
+ Index.html file:
+
+ ![image](https://github.com/nsarode09/SerenityCucumberBDDWeatherbitFramework/assets/139661841/bc1e92f9-3ded-4698-bcfc-2e184efca699)
 
