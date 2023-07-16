@@ -1,6 +1,7 @@
 package WeatherbitAPI.WeatherbitAPI.com.runner;
 
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 
@@ -8,7 +9,6 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 @CucumberOptions(
 		features = "src\\test\\resources\\feature",
 		glue = "WeatherbitAPI.WeatherbitAPI.com.stepDefinitions",
-		tags = "@tag1",
 		plugin = {"pretty"}
 		)
 

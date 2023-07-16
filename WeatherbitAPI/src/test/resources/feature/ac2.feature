@@ -1,5 +1,6 @@
 #Author: Nira Sarode
 
+@tag:CurrentWeatherPOSTALCODEAPI
 Feature: Get current weather data for multiple places in the world based on postalCode
 
   @tag3

@@ -1,5 +1,6 @@
 #Author: Nira Sarode
 
+@tag:CurrentWeatherLATLONAPI
 Feature: Get current weather data for multiple places in the world based on lat and lon
 
   @tag1

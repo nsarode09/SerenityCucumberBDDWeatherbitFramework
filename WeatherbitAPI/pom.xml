@@ -14,6 +14,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<serenity.version>3.9.0</serenity.version>
+		<serenity.cucumber.version>2.6.0</serenity.cucumber.version>
 		<tags></tags>
 	</properties>
 
@@ -29,6 +30,17 @@
 			<artifactId>serenity-core</artifactId>
 			<version>${serenity.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-ensure</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
 			<artifactId>serenity-cucumber</artifactId>
@@ -51,9 +63,21 @@
 			<version>20230618</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<includes>
+						<include>**/TestRunner.java</include>
+					</includes>
+					<parallel>methods</parallel>
+					<threadCount>4</threadCount>
+					<useUnlimitedThreads>false</useUnlimitedThreads>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>net.serenity-bdd.maven.plugins</groupId>
 				<artifactId>serenity-maven-plugin</artifactId>
@@ -67,7 +91,6 @@
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>aggregate</goal>
-							<goal>verify</goal>
 						</goals>
 					</execution>
 				</executions>
