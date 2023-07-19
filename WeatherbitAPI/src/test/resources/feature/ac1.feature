@@ -32,6 +32,14 @@ Feature: Get current weather data for multiple places in the world based on lat 
   | cities_all.csv   | 2       | 200          |
   | cities_all.csv   | 19      | 200          |
 
+  @tagAll
+  Scenario Outline: TC_02_Verify current weather API with lat and lon for all data from csv file
+  Given The user reads config properties
+  And The user set, execute and validate request for current weather api for all rows from '<CSVFileName>' csv
+  
+  Examples:
+  |CSVFileName       | 
+  |postal_codes1.csv | 
   
   
     

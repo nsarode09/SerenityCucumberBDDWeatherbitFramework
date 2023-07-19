@@ -1,6 +1,7 @@
 package WeatherbitAPI.WeatherbitAPI.com.steps;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import WeatherbitAPI.WeatherbitAPI.com.actions.Utilities;
@@ -19,6 +20,8 @@ public class CurrentWeatheLatLonAPIStep{
 	private String csvFile = "";
 	private Map<String, String> rowDetails;
 	Utilities utl;
+	List<String[]> remainindData;
+	private Map<String, String> singleRowDetails;
 	
 	@Step
 	public void readConfigProp() throws Throwable {
@@ -27,7 +30,7 @@ public class CurrentWeatheLatLonAPIStep{
  
 	@Step
 	public void executeCurrentWeatherAPI() {
-		response = SerenityRest.given().spec(requestSpecs).get(Utilities.configFile.getProperty("Base_url"));
+		response = SerenityRest.given().spec(requestSpecs).get(Utilities.configFile.getProperty("Base_url") + "/current");		
 	}
 
 	@Step
@@ -51,7 +54,7 @@ public class CurrentWeatheLatLonAPIStep{
 		if(response != null) {
 			//validate statusCode
 			Integer actualStatusCode = response.then().extract().statusCode();
-			System.out.print("Actual reponse status code is " + actualStatusCode);
+			System.out.println("Actual reponse status code is " + actualStatusCode);
 			if(actualStatusCode != statusCode) {
 				Assert.assertTrue("Current Weather API Response is 200", true);
 			}else { 
@@ -82,8 +85,8 @@ public class CurrentWeatheLatLonAPIStep{
 	}
 
 	@Step
-	public void setupCurrentWeatherAPIForLatLonPassedFromCSV(String csvName,int rowNum) throws Throwable {
-		rowDetails = utl.getRowDeatilsFromCSVRow(csvFile,rowNum);
+	public void setupCurrentWeatherAPIForLatLonPassedFromCSV(String csvName, int rowNum) throws Throwable {
+		rowDetails = utl.getRowDeatilsFromCSVRow(csvFile, rowNum);
 		switch(csvName.toLowerCase()) {
 		case "postal_codes.csv": {
 			if(rowDetails.containsKey("approximate_centroid_lat") && rowDetails.containsKey("approximate_centroid_lon")) {
@@ -130,6 +133,21 @@ public class CurrentWeatheLatLonAPIStep{
 		csvFile = System.getProperty("user.dir") + "/src/test/resources/TestFolder/" + csvFile;
 	}
 	
+	@Step
+	public void runAllDataFromPostalCodeCSV() throws Throwable {
+		utl.readCSV(csvFile);
+		int csvSize = utl.getCSVSize();
+		for(int i = 1; i < csvSize; i++) {
+			singleRowDetails = utl.getRowDetailsFromCSV(i);
+			if(singleRowDetails.containsKey("approximate_centroid_lat") && singleRowDetails.containsKey("approximate_centroid_lon")) {
+				setlatlonCurrentWeatherAPIRequest(singleRowDetails.get("approximate_centroid_lat"),singleRowDetails.get("approximate_centroid_lon"));
+			}else {
+				Assert.assertTrue("lat and lon values are not present in postalCode CSV", false);
+			}
+			executeCurrentWeatherAPI();
+			validateSuccessStatusCode(200);		
+		}
+	}
 	
 }
 

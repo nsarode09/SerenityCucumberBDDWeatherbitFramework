@@ -9,6 +9,7 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 @CucumberOptions(
 		features = "src\\test\\resources\\feature",
 		glue = "WeatherbitAPI.WeatherbitAPI.com.stepDefinitions",
+		tags = "@tag:CurrentWeatherLATLONAPI",
 		plugin = {"pretty"}
 		)
 

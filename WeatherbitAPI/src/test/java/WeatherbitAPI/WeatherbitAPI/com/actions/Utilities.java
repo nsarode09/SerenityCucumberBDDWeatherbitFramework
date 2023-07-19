@@ -39,8 +39,8 @@ public class Utilities extends BaseActions {
 			}
 		}
 	}
-
-	public Map<String, String> getRowDeatilsFromCSVRow(String csvFile, int rowNum) throws Throwable{
+	
+	public Map<String, String> getRowDeatilsFromCSVRow(String csvFile,int rowNum) throws Throwable{
 		readCSV(csvFile);
 		Map<String, String> dataAsKeyValue = new HashMap<String, String>();
 		for(int i = 0; i < headers.length ; i++) {
@@ -48,5 +48,28 @@ public class Utilities extends BaseActions {
 		}
 		return dataAsKeyValue;
 	}
+	
+	public List<String[]> getDataExceptHeaderFromCSV() {
+		List<String[]> remainingDataFromCSV = null;
+		for(int i = 1; i < testDetails.size(); i++) {
+			remainingDataFromCSV.add(testDetails.get(i));
+		}
+		return remainingDataFromCSV;		
+	}
+
+	public int getCSVSize() {
+		int size;
+		return size = testDetails.size();
+	}
+	
+	public Map<String, String> getRowDetailsFromCSV(int rowNum) throws Throwable{
+		Map<String, String> dataAsKeyValue = new HashMap<String, String>();
+		for(int i = 0; i < headers.length ; i++) {
+			dataAsKeyValue.put(headers[i].toString(), testDetails.get(rowNum)[i].toString());
+		}
+		return dataAsKeyValue;
+	}
+	
+
 }
 

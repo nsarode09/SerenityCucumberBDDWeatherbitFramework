@@ -33,13 +33,19 @@ public class CurrentWeatherLatLonAPISD {
 	@And("^The user step up the request for current weather api for (.*) number from '(.*)' csv$")
 	public void setupCurrentWeatherAPIForLatLonPassedFromCSV(int rowNum, String csvName) throws Throwable {
 		cwLatLonAPIStep.getCSVFile(csvName);
-		cwLatLonAPIStep.setupCurrentWeatherAPIForLatLonPassedFromCSV(csvName,rowNum);
+		cwLatLonAPIStep.setupCurrentWeatherAPIForLatLonPassedFromCSV(csvName, rowNum);
 	}
 	
 	@Then("^The user validate the current weather api response for (.*) and country code$")
 	public void validateCurrentWeatherAPIResponseBasedOnPostalCodeCSV(Integer statusCode) {
 		cwLatLonAPIStep.validateSuccessStatusCode(statusCode);
 		cwLatLonAPIStep.validateCurrentWeatherAPIResponseBasedOnPostalCodeCSV();
+	}
+	
+	@Then("^The user set, execute and validate request for current weather api for all rows from '(.*)' csv$")
+	public void setExecuteValidateCWAPIFromPostalCodeCSV(String csvFileName) throws Throwable {
+		cwLatLonAPIStep.getCSVFile(csvFileName);
+		cwLatLonAPIStep.runAllDataFromPostalCodeCSV();
 	}
 	
 	
